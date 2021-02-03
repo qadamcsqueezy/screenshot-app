@@ -1,43 +1,33 @@
-package com.qada99.screenshot.screen;
+package com.qada99.screenshot.service.screen;
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Area;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Area;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-
-import com.qada99.screenshot.Main;
-
-import javafx.application.Platform;
 
 public class ScreenSizer {
 	
@@ -67,11 +57,12 @@ public class ScreenSizer {
 	            frame.setUndecorated(true);
 	            // This works differently under Java 6
 	            frame.setBackground(new Color(0, 0, 0, 0));
-	            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//	            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	            frame.setLayout(new BorderLayout());
 	            frame.add(new ScreenSizerPane());
 	            frame.setBounds(getVirtualBounds());
 	     	    frame.setVisible(true);
+				frame.toFront();
 	  
      
     }
@@ -114,10 +105,15 @@ public class ScreenSizer {
                           y = dragPoint.y;
                           height *= -1;
                       }
-	                  SwingUtilities.getWindowAncestor(ScreenSizerPane.this).dispose();
-	                  for (ScreenSetted listener : listeners) {
+					ScreenSizer.this.screen = new Rectangle(ScreenSizerPane.this.selectionPane.getX(),
+							ScreenSizerPane.this.selectionPane.getY(), ScreenSizerPane.this.selectionPane.getWidth(),
+							ScreenSizerPane.this.selectionPane.getHeight());
+					for (ScreenSetted listener : listeners) {
 						listener.screenSetted();
 					}
+
+	                  SwingUtilities.getWindowAncestor(ScreenSizerPane.this).dispose();
+
 //	                  Platform.runLater(new Runnable() {
 //						@Override
 //						public void run() {							

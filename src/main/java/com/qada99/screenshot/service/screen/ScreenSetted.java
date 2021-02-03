@@ -1,4 +1,4 @@
-package com.qada99.screenshot.screen;
+package com.qada99.screenshot.service.screen;
 
 public interface ScreenSetted {
    
