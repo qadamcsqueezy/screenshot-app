@@ -45,7 +45,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="104.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="104.0" layoutY="20.0" onMouseClicked="#sreenShot" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/camera.png" />
                </image>
@@ -131,7 +131,7 @@
                               <Image url="@images/file.png" />
                            </image>
                         </ImageView>
-                        <JFXComboBox fx:id="typesComboBox" focusColor="BLACK" labelFloat="true" prefHeight="25.0" prefWidth="102.0" promptText="Type" unFocusColor="#000000d9" />
+                        <JFXComboBox fx:id="typesComboBox" focusColor="BLACK" labelFloat="true" onAction="#changeType" prefHeight="25.0" prefWidth="102.0" promptText="Type" unFocusColor="#000000d9" />
                      </children>
                   </HBox>
                   <HBox layoutX="1.0" layoutY="69.0" prefHeight="25.0" prefWidth="172.0">

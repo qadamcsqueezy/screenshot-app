@@ -2,6 +2,7 @@ package com.qada99.screenshot.view;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,15 +24,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.transform.Rotate;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.DirectoryChooser;
-
 public class MainController {
 
 	private Settings setting;
 	private Timer timer;
 	private Screenshot screenshot;
-
+	private Media sound;
 	@FXML
 	private AnchorPane settingPane, outputPane, shutdownPane;
 
@@ -56,6 +57,11 @@ public class MainController {
 	}
 
 	@FXML
+	void sreenShot(MouseEvent event) {
+		MediaPlayer mediaplayer = new MediaPlayer(sound);
+		mediaplayer.play();
+	}
+	@FXML
 	private void initialize() {
 		this.settingPane.setVisible(false);
 		this.outputPane.setVisible(false);
@@ -74,6 +80,9 @@ public class MainController {
 		this.typesComboBox.getItems().add(OutputType.PDF);
 		this.typesComboBox.setValue(OutputType.PDF);
 	    this.typesComboBox.getItems().add(OutputType.PPX);	
+		sound = new Media(
+				Paths.get("src/main/resources/audio/screenshot-sound.mp3").toUri().toString());
+
 	}
 
 	@FXML
@@ -123,11 +132,6 @@ public class MainController {
 		}
 		if (verticalCheckBox.isSelected()) {
 			this.getSetting().getOutputConfig().setPageOrientation(PageOrientation.VERTICAL);
-			Rotate rotate = new Rotate();
-			// Setting pivot points for the rotation
-			rotate.setPivotX(300);
-			rotate.setPivotY(100);
-			System.out.println(rotatedImage.getRotate());
 			rotatedImage.setRotate(rotatedImage.getRotate() + 90);
 		} else {
 			this.getSetting().getOutputConfig().setPageOrientation(PageOrientation.HORIZONTAL);
@@ -159,6 +163,7 @@ public class MainController {
 		settingPane.setVisible(!settingPane.isVisible());
 		outputPane.setVisible(false);
 	}
+
 
 	public Settings getSetting() {
 		return setting;
