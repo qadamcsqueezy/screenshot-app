@@ -1,8 +1,6 @@
 package com.qada99.screenshot.service;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import com.qada99.screenshot.config.enumeration.OutputType;
 
@@ -16,10 +14,10 @@ public class FileGenerator {
 
 	}
 
-	public void generate(List<File> images, String output, OutputType outputType) throws IOException {
+	public void generate(Settings settings, String outputFile) throws IOException {
 
-		if (outputType == OutputType.PDF) {
-			pdfGenarator.generate(images, output);
+		if (settings.getOutputConfig().getType() == OutputType.PDF) {
+			pdfGenarator.generate(settings, outputFile + ".pdf");
 		}
 
 	}

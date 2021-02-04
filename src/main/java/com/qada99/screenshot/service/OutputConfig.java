@@ -7,7 +7,7 @@ public class OutputConfig {
 
 	private PageOrientation pageOrientation;
 	private OutputType type;
-	private double padding;
+	private float padding;
 	private boolean keepImage;
 
 	public OutputConfig() {
@@ -15,7 +15,7 @@ public class OutputConfig {
 
 	}
 
-	public OutputConfig(PageOrientation pageOrientation, OutputType type, double padding, boolean keepImage) {
+	public OutputConfig(PageOrientation pageOrientation, OutputType type, float padding, boolean keepImage) {
 		super();
 		this.pageOrientation = pageOrientation;
 		this.type = type;
@@ -39,11 +39,11 @@ public class OutputConfig {
 		this.type = type;
 	}
 
-	public double getPadding() {
+	public float getPadding() {
 		return padding;
 	}
 
-	public void setPadding(double padding) {
+	public void setPadding(float padding) {
 		this.padding = padding;
 	}
 

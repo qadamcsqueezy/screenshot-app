@@ -20,9 +20,11 @@ public class Settings implements ScreenSetted{
 	private Stage primaryStage;
 	private String seanceName;
 	private File outputFolder;
-	private List<OutputType> outputTypes;
 	private final String defaultOutputFolder = System.getProperty("user.home");
 	private OutputConfig outputConfig;
+
+	private List<File> images;
+
 
 	public Settings(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -43,28 +45,7 @@ public class Settings implements ScreenSetted{
     	return this.screenSizer.getScreen();
     }
 	public void setScreen() {
-//		this.primaryStage.setOpacity(0);
-//		;
-//		Platform.runLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				Main.hideStage();
-//
-//			}
-//		});
 		Settings.this.screenSizer.setScreen();
-
-//		System.out.println(Platform.isFxApplicationThread());
-//
-//		Platform.runLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				Settings.this.screenSizer.setScreen();
-//
-//			}
-//
-//		});
-
 	}
 
 	public String getSeanceName() {
@@ -86,17 +67,6 @@ public class Settings implements ScreenSetted{
 		this.outputFolder = outputFolder;
 	}
 
-	public List<OutputType> getOutputTypes() {
-		if (this.outputTypes == null) {
-			this.outputTypes = new ArrayList<OutputType>();
-		}
-		return outputTypes;
-	}
-
-	public void setOutputTypes(List<OutputType> outputTypes) {
-		this.outputTypes = outputTypes;
-	}
-
 	@Override
 	public void screenSetted() {
 		Main.showStage();
@@ -106,7 +76,7 @@ public class Settings implements ScreenSetted{
 
 	public OutputConfig getOutputConfig() {
 		if (this.outputConfig == null) {
-			this.outputConfig = new OutputConfig(PageOrientation.VERTICAL, OutputType.PDF, 20f, false);
+			this.outputConfig = new OutputConfig(PageOrientation.VERTICAL, OutputType.PDF, 60f, false);
 		}
 		return outputConfig;
 	}
@@ -117,6 +87,16 @@ public class Settings implements ScreenSetted{
 	}
 
 
+	public List<File> getImages() {
+		if (this.images == null) {
+			this.images = new ArrayList<File>();
+		}
+		return images;
+	}
+
+	public void setImages(List<File> images) {
+		this.images = images;
+	}
 	
 	
 }

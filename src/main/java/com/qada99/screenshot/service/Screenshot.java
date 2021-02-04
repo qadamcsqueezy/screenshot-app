@@ -6,10 +6,6 @@ import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
@@ -28,12 +24,13 @@ public class Screenshot {
 
 	}
 
-	public Path capture(Rectangle screen, String outPutFile) throws IOException, URISyntaxException {
-		ImageIO.write(robot.createScreenCapture(screen), extension, new File(outPutFile));
-		return Paths.get(new URI(outPutFile));
+	public File capture(Rectangle screen, String path) throws IOException {
+		File image = new File(path);
+		ImageIO.write(robot.createScreenCapture(screen), extension, image);
+		return image;
 	}
 
-	public BufferedImage  capture(Rectangle screen) throws IOException, URISyntaxException {
+	public BufferedImage capture(Rectangle screen) {
 		return robot.createScreenCapture(screen);
 	}
 	public String getExtension() {
