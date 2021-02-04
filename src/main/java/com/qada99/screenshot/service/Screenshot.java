@@ -3,6 +3,7 @@ package com.qada99.screenshot.service;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -32,6 +33,9 @@ public class Screenshot {
 		return Paths.get(new URI(outPutFile));
 	}
 
+	public BufferedImage  capture(Rectangle screen) throws IOException, URISyntaxException {
+		return robot.createScreenCapture(screen);
+	}
 	public String getExtension() {
 		return extension;
 	}

@@ -5,7 +5,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.qada99.screenshot.Main;
 import com.qada99.screenshot.config.enumeration.OutputType;
+import com.qada99.screenshot.config.enumeration.PageOrientation;
 import com.qada99.screenshot.service.screen.ScreenSetted;
 import com.qada99.screenshot.service.screen.ScreenSizer;
 
@@ -20,7 +22,7 @@ public class Settings implements ScreenSetted{
 	private File outputFolder;
 	private List<OutputType> outputTypes;
 	private final String defaultOutputFolder = System.getProperty("user.home");
-	
+	private OutputConfig outputConfig;
 
 	public Settings(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -43,7 +45,13 @@ public class Settings implements ScreenSetted{
 	public void setScreen() {
 //		this.primaryStage.setOpacity(0);
 //		;
-		this.primaryStage.toBack();
+//		Platform.runLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				Main.hideStage();
+//
+//			}
+//		});
 		Settings.this.screenSizer.setScreen();
 
 //		System.out.println(Platform.isFxApplicationThread());
@@ -91,44 +99,24 @@ public class Settings implements ScreenSetted{
 
 	@Override
 	public void screenSetted() {
-		System.out.println(this.getScreen());
-//		Task task = new Task<Void>() {
-//
-//			@Override
-//			protected Void call() throws Exception {
-//
-//				System.out.println(Platform.isFxApplicationThread() + "salams");
-//				Settings.this.getPrimaryStage().setOpacity(1);
-//				;
-//				return null;
-//			}
-//
-//		};
-//		new Thread(task).start();
-//		Settings.this.getPrimaryStage().show();
-
-//		Thread thread = new Thread(new Runnable() {
-//				@Override
-//				public void run() {
-//				System.out.println("hey4");
-////					System.out.println(Settings.this.getPrimaryStage().toString());
-//				Settings.this.getPrimaryStage().show();
-//				}
-//				
-//				});
-//		thread.start();
-		// this.primaryStage.show();
-//		Platform.runLater(new Runnable() {
-//				@Override
-//				public void run() {
-//				System.out.println("hey4");
-//				System.out.println(Settings.this.getPrimaryStage().toString());
-//				}
-//				
-//				});
+		Main.showStage();
 		
 	}
-	
+
+
+	public OutputConfig getOutputConfig() {
+		if (this.outputConfig == null) {
+			this.outputConfig = new OutputConfig(PageOrientation.VERTICAL, OutputType.PDF, 20f, false);
+		}
+		return outputConfig;
+	}
+
+
+	public void setOutputConfig(OutputConfig outputConfig) {
+		this.outputConfig = outputConfig;
+	}
+
+
 	
 	
 }

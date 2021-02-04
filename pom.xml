@@ -18,7 +18,16 @@
     <artifactId>pdfbox</artifactId>
     <version>2.0.22</version>
 </dependency>
-  
+  <dependency>
+    <groupId>com.jfoenix</groupId>
+    <artifactId>jfoenix</artifactId>
+    <version>8.0.1</version>
+</dependency>
+        <dependency>
+            <groupId>io.github.typhon0</groupId>
+            <artifactId>AnimateFX</artifactId>
+            <version>1.2.1-SNAPSHOT</version>
+        </dependency>
 </dependencies>
     <build>
         <plugins>
