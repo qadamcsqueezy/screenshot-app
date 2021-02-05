@@ -22,10 +22,12 @@ import com.qada99.screenshot.service.Screenshot;
 import com.qada99.screenshot.service.Settings;
 import com.qada99.screenshot.util.ImageUtil;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -33,6 +35,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.DirectoryChooser;
+import javafx.util.Duration;
+
 public class MainController {
 
 	private Settings setting;
@@ -42,7 +46,7 @@ public class MainController {
 	private Media sound;
 	private int counter = 0;
 	@FXML
-	private AnchorPane settingPane, outputPane;
+	private AnchorPane settingPane, outputPane, cat;
 	@FXML
 	private JFXTextField seanceName, padding;
 	@FXML
@@ -50,10 +54,10 @@ public class MainController {
 	@FXML
 	private AnchorPane mainPane;
 	@FXML
-	private Label folderName;
+	private Label folderName, message;
 
 	@FXML
-	private ImageView changedImage, rotatedImage;
+	private ImageView changedImage, rotatedImage, shutdownIcon;
 	@FXML
 	private JFXToggleButton keepImageToggle;
 
@@ -73,7 +77,7 @@ public class MainController {
 		if (counter == 0) {
 			try {
 				Files.createDirectory(Paths.get(folderPath));
-				// you can't now change output folder
+				// you can't change output folder db
 				this.seanceName.setEditable(false);
 
 			} catch (IOException e) {
@@ -84,7 +88,7 @@ public class MainController {
 		try {
 			this.setting.getImages().add(this.screenshot.capture(this.setting.getScreen(),
 					folderPath + File.separator + "screen" + (counter + 1) + ".png"));
-			// if all goes good
+			// ila kolchi howa hadak
 			counter++;
 			MediaPlayer mediaplayer = new MediaPlayer(sound);
 			mediaplayer.play();
@@ -96,8 +100,20 @@ public class MainController {
 
 	@FXML
 	void generate(MouseEvent event) {
-		if (counter == 0)
+		if (counter == 0) {
+			this.message.setText("No Images");
 			return;
+		}
+		this.cat.toFront();
+		this.cat.setVisible(true);
+		this.outputPane.setVisible(false);
+		PauseTransition pause = new PauseTransition(Duration.seconds(4));
+		pause.setOnFinished(ev -> {
+			this.cat.setVisible(false);
+			this.outputPane.setVisible(true);
+			this.outputPane.toFront();
+
+		});
 		this.setting.getOutputConfig().setType(typesComboBox.getValue());
 		if (verticalCheckBox.isSelected())
 			this.setting.getOutputConfig().setPageOrientation(PageOrientation.VERTICAL);
@@ -114,6 +130,7 @@ public class MainController {
 		String filePath = this.setting.getOutputFolder().toString() + File.separator + this.setting.getSeanceName()
 				+ File.separator + this.setting.getSeanceName();
 
+		pause.play();
 		try {
 			this.fileGenerator.generate(setting, filePath);
 			// kolchi howa hadak
@@ -124,15 +141,21 @@ public class MainController {
 				this.setting.getImages().clear();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.message.setText("Error");
 		}
+		this.message.setText("Done");
+		this.counter = 0;
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-hh-mm");
+		this.seanceName.setText("seance-" + dateFormat.format(new Date()));
+		this.seanceName.setEditable(true);
+		this.setting.setSeanceName(this.seanceName.getText());
 
 	}
 	@FXML
 	private void initialize() {
 		this.settingPane.setVisible(false);
 		this.outputPane.setVisible(false);
+		this.cat.setVisible(false);
 		this.setting = new Settings(Main.primaryStage);
 		this.changedImage.maxHeight(57);
 		this.changedImage.maxWidth(100);
@@ -143,18 +166,21 @@ public class MainController {
 				changeImage();
 			}
 		}, 0, 500);
-		this.verticalCheckBox.setSelected(true);
+		this.horizontalCheckBox.setSelected(true);
 		this.typesComboBox.getItems().add(OutputType.PDF);
 		this.typesComboBox.setValue(OutputType.PDF);
 	    this.typesComboBox.getItems().add(OutputType.PPX);	
-		DateFormat dateFormat = new SimpleDateFormat("dd-mm-hh-mm");
-
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-hh-mm");
+		Tooltip.install(shutdownIcon, new Tooltip("Double click to close"));
 		this.seanceName.setText("seance-" + dateFormat.format(new Date()));
+		this.padding.setText("60");
 		this.setting.setSeanceName(this.seanceName.getText());
 		sound = new Media(
 				Paths.get("src/main/resources/audio/screenshot-sound.mp3").toUri().toString());
 
 	}
+
+
 
 	@FXML
 	void outputClicked(MouseEvent event) {
@@ -218,8 +244,12 @@ public class MainController {
 
 	@FXML
 	void shutdown(MouseEvent event) {
-		this.timer.cancel();
-		Platform.exit();
+
+		if (event.getClickCount() == 2) {
+			this.timer.cancel();
+			Platform.exit();
+		}
+
 
 	}
 	@FXML

@@ -7,27 +7,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 
 public class ScreenSizer {
 	
@@ -172,42 +163,13 @@ public class ScreenSizer {
 
     public class SelectionPane extends JPanel {
 
-        private JButton button;
-        private JLabel label;
-        public SelectionPane() {
-            button = new JButton("Close");
+		public SelectionPane() {
             setOpaque(false);
-            label = new JLabel("Rectangle");
-            label.setOpaque(true);
-            label.setBorder(new EmptyBorder(4, 4, 4, 4));
-            label.setBackground(Color.GRAY);
-            label.setForeground(Color.WHITE);
-            setLayout(new GridBagLayout());
 
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            add(label, gbc);
 
-            gbc.gridy++;
-            add(button, gbc);
 
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    SwingUtilities.getWindowAncestor(SelectionPane.this).dispose();
-                }
-            });
 
-            addComponentListener(new ComponentAdapter() {
-                @Override
-                public void componentResized(ComponentEvent e) {
-            
-                    label.setText("Rectangle " + getX() + "x" + getY() + "x" + getWidth() + "x" + getHeight());
-                    
-             
-                }
-            });
+
 
         }
 

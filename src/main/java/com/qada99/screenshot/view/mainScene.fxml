@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="185.0" style="-fx-background-color: rgba(0,0,0,0);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qada99.screenshot.view.MainController">
    <children>
-      <HBox layoutY="-1.0" prefHeight="30.0" prefWidth="185.0" spacing="15.0" style="-fx-background-color: #fff; -fx-border-radius: 50px;">
+      <HBox prefHeight="30.0" prefWidth="185.0" spacing="15.0" style="-fx-background-color: #fff; -fx-border-radius: 50px;">
          <padding>
             <Insets bottom="8.5" left="10.0" right="10.0" top="8.5" />
          </padding>
@@ -37,7 +37,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="62.0" layoutY="20.0" onMouseClicked="#shutdown" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="shutdownIcon" fitHeight="30.0" fitWidth="30.0" layoutX="62.0" layoutY="20.0" onMouseClicked="#shutdown" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/shutdown.png" />
                </image>
@@ -58,7 +58,16 @@
             <Insets />
          </opaqueInsets>
       </HBox>
-      <AnchorPane fx:id="settingPane" layoutY="58.0" prefHeight="292.0" prefWidth="185.0" style="-fx-background-color: #fff;">
+      <AnchorPane fx:id="cat" layoutY="50.0" prefHeight="292.0" prefWidth="185.0" style="-fx-background-color: #fff;">
+         <children>
+            <ImageView fitHeight="209.0" fitWidth="185.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/cat.gif" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="settingPane" layoutY="50.0" prefHeight="292.0" prefWidth="185.0" style="-fx-background-color: #fff;">
          <children>
             <Pane layoutX="7.0" layoutY="3.0" prefHeight="281.0" prefWidth="173.0">
                <children>
@@ -119,7 +128,7 @@
                </children></Pane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="outputPane" layoutY="58.0" prefHeight="292.0" prefWidth="185.0" style="-fx-background-color: #fff;">
+      <AnchorPane fx:id="outputPane" layoutY="50.0" prefHeight="292.0" prefWidth="185.0" style="-fx-background-color: #fff;">
          <children>
             <Pane layoutX="6.0" layoutY="6.0" prefHeight="281.0" prefWidth="173.0">
                <children>
@@ -168,7 +177,7 @@
                         </JFXTextField>
                      </children>
                   </HBox>
-                  <ImageView fx:id="rotatedImage" fitHeight="67.0" fitWidth="61.0" layoutX="104.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="rotatedImage" fitHeight="48.0" fitWidth="38.0" layoutX="116.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/pdf.png" />
                      </image>
@@ -188,6 +197,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
+                  <Label fx:id="message" layoutX="23.0" layoutY="257.0" prefHeight="17.0" prefWidth="80.0" />
                </children>
             </Pane>
          </children></AnchorPane>

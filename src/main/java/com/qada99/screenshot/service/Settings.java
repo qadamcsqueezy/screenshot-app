@@ -76,7 +76,7 @@ public class Settings implements ScreenSetted{
 
 	public OutputConfig getOutputConfig() {
 		if (this.outputConfig == null) {
-			this.outputConfig = new OutputConfig(PageOrientation.VERTICAL, OutputType.PDF, 60f, false);
+			this.outputConfig = new OutputConfig(PageOrientation.HORIZONTAL, OutputType.PDF, 60f, false);
 		}
 		return outputConfig;
 	}
