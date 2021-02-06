@@ -2,6 +2,7 @@ package com.qada99.screenshot;
 
 
 import java.awt.Rectangle;
+import java.nio.file.Paths;
 
 import com.qada99.screenshot.view.MainController;
 
@@ -10,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -27,6 +29,9 @@ public class Main extends Application{
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(MainController.class.getResource("mainScene.fxml"));
 		Main.primaryStage = stage;
+
+		Image icon = new Image(Paths.get("src/main/resources/icon.png").toUri().toString());
+		primaryStage.getIcons().add(icon);
     	 Scene scene = new Scene(root);
 		primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
