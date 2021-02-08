@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="185.0" style="-fx-background-color: rgba(0,0,0,0);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qada99.screenshot.view.MainController">
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="185.0" style="-fx-background-color: rgba(0,0,0,0);" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.qada99.screenshot.view.MainController">
    <children>
       <HBox prefHeight="30.0" prefWidth="185.0" spacing="15.0" style="-fx-background-color: #fff; -fx-border-radius: 50px;">
          <padding>
